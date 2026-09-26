@@ -4,7 +4,6 @@ import os
 import time
 import json
 import base64
-from table_logger import table_logger
 
 from kubernetes import client as k8s_client
 from kubernetes import config as k8s_config
@@ -81,15 +80,14 @@ class KubernetesManager:
             self,
             name: str,
             namespace: str = "default",
-            label_selector: Dict[str, str] = None,
+            label_selector: Union[Dict[str, str], str] = None,
             timeout_seconds: int = 600
             ):
-        
-        log_table = table_logger.TableLogger(
-            columns='NAME,READY',
-            colwidth={'NAME': 20, 'READY': 10},
-            border=False,
-        )
+        print(f"{'NAME':<20} {'READY':<10}")
+        if isinstance(label_selector, dict):
+            label_selector = ",".join(
+                f"{key}={value}" for key, value in sorted(label_selector.items())
+            )
 
         stream = k8s_watch.Watch().stream(
             self.client.list_namespaced_pod,
@@ -100,18 +98,31 @@ class KubernetesManager:
         )
         for event in stream:
             pod = event['object']
-            pod_name = pod['metadata']['name']
+            if isinstance(pod, dict):
+                pod_name = (pod.get('metadata') or {}).get('name')
+                status = pod.get('status')
+                conditions = (status or {}).get('conditions') or []
+            else:
+                pod_name = pod.metadata.name if pod.metadata else None
+                status = pod.status
+                conditions = status.conditions if status else []
             if name != pod_name:
                 continue
             else:
-                if pod.get('status', ''):
-                    status = PodStatus.UNKNOWN
-                    for condition in pod['status'].get('conditions', {}):
-                        if condition.get('type', '') ==  PodConditionType.READY:
-                            status = condition.get('status', PodConditionStatus.UNKNOWN)
-                    log_table(pod_name, status)
+                if status:
+                    ready_status = PodConditionStatus.UNKNOWN
+                    for condition in conditions:
+                        if isinstance(condition, dict):
+                            condition_type = condition.get('type')
+                            condition_status = condition.get('status')
+                        else:
+                            condition_type = condition.type
+                            condition_status = condition.status
+                        if condition_type == PodConditionType.READY.value:
+                            ready_status = condition_status or PodConditionStatus.UNKNOWN
+                    print(f"{pod_name:<20} {str(ready_status):<10}")
                 else:
-                    log_table(pod_name, PodStatus.UNKNOWN)
+                    print(f"{pod_name:<20} {str(PodStatus.UNKNOWN):<10}")
                     time.sleep(2)
                     continue
 
@@ -226,16 +237,18 @@ class KubernetesManager:
             ):
         ns: V1Namespace = self.client.read_namespace(name=name)
 
-        old_metadata: V1ObjectMeta = ns["metadata"]
-        old_labels = old_metadata["labels"]
-        old_annotations = old_metadata["annotations"]
-        new_labels = dict(old_labels, **labels)
-        new_annotations = dict(old_annotations, **annotations)
+        old_metadata: V1ObjectMeta = ns.metadata
+        new_labels = dict(old_metadata.labels or {})
+        new_annotations = dict(old_metadata.annotations or {})
+        if labels:
+            new_labels.update(labels)
+        if annotations:
+            new_annotations.update(annotations)
         new_ns = V1Namespace(
             metadata=V1ObjectMeta(
                 name=name,
-                labels=new_labels,
-                annotations=new_annotations,
+                labels=new_labels or None,
+                annotations=new_annotations or None,
             ),
         )
         return self.client.patch_namespace(name=name, body=new_ns)
@@ -269,9 +282,11 @@ class KubernetesManager:
         if self.check_ns_exists(name):
             old_ns: V1Namespace = self.client.read_namespace(name=name)
             old_metadata: V1ObjectMeta = old_ns.metadata
-            old_metadata.labels = dict(old_metadata.labels, **labels)
+            old_metadata.labels = dict(old_metadata.labels or {}, **labels)
             if annotations:
-                old_metadata.annotations = dict(old_metadata.annotations, **annotations)
+                old_metadata.annotations = dict(
+                    old_metadata.annotations or {}, **annotations
+                )
             old_ns.metadata = old_metadata
 
             new_ns = self.client.patch_namespace(name=name, body=old_ns)
@@ -508,7 +523,7 @@ class KubernetesManager:
     def _set_secret_refs(self, secret_names: Optional[List[str]] = None) -> Optional[List[V1ObjectReference]]:
         if secret_names is None:
             secrets = None
-        elif isinstance(secret_names, List):
+        elif isinstance(secret_names, list):
             secrets = [V1ObjectReference(name=name) for name in secret_names]
         else:
             raise ValueError("'secret_names' should be type 'List' or None.")
@@ -517,7 +532,7 @@ class KubernetesManager:
     def _set_image_pull_secret_refs(self, secret_names: Optional[List[str]] = None) -> Optional[List[V1LocalObjectReference]]:
         if secret_names is None:
             secrets = None
-        elif isinstance(secret_names, List):
+        elif isinstance(secret_names, list):
             secrets = [V1LocalObjectReference(name=name) for name in secret_names]
         else:
             raise ValueError("'secret_names' should be type 'List' or None.")
@@ -615,17 +630,20 @@ class KubernetesManager:
             gpu_req: Optional[int] = None,
             gpu_limit: Optional[int] = None,
             ) -> V1ResourceRequirements:
-        return V1ResourceRequirements(
+        spec = ResourceSpec(
             requests=Spec(
                 cpu=cpu_req,
                 memory=mem_req,
                 gpu=gpu_req,
-            ).dict(),
+            ),
             limits=Spec(
                 cpu=cpu_limit,
                 memory=mem_limit,
                 gpu=gpu_limit,
-            ).dict(),
+            ),
+        )
+        return V1ResourceRequirements(
+            **spec.model_dump(by_alias=True, exclude_none=True)
         )
 
     @staticmethod

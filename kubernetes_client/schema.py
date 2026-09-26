@@ -1,6 +1,13 @@
 
-from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, Field, validator
+from typing import Optional
+
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    field_serializer,
+    model_validator,
+)
 
 
 __all__ = [
@@ -41,41 +48,40 @@ NAMEField = Field(
 
 
 class Spec(BaseModel):
-    cpu: Optional[int] = CPUField
+    model_config = ConfigDict(validate_by_name=True, validate_by_alias=True)
+
+    cpu: Optional[float] = CPUField
     memory: Optional[float] = MEMField
     gpu: Optional[int] = GPUField
 
-    @validator("memory", always=True)
-    def format_memory(cls, v):
-        return f"{v}Gi"
+    @field_serializer("cpu")
+    def format_cpu(self, value: Optional[float]) -> Optional[str]:
+        return format(value, "g") if value is not None else None
+
+    @field_serializer("memory")
+    def format_memory(self, value: Optional[float]) -> Optional[str]:
+        return f"{value:g}Gi" if value is not None else None
+
+    @field_serializer("gpu")
+    def format_gpu(self, value: Optional[int]) -> Optional[str]:
+        return str(value) if value is not None else None
 
 
 class ResourceSpec(BaseModel):
     requests: Optional[Spec] = None
     limits: Optional[Spec] = None
 
-    def _validate_minmax(
-            cls,
-            request: Union[int, float],
-            limit: Union[int, float]
-            ) -> Union[int, float]:
-        if limit < request:
-            return request
-        else:
-            return limit
+    @model_validator(mode="after")
+    def validate_minmax(self) -> "ResourceSpec":
+        if self.requests is None or self.limits is None:
+            return self
 
-    @validator("limits", always=True)
-    def validate_minmax(cls, v, values, **kwargs):
-        requests = values['requests']
-        if v is not None and requests is not None:
-            requests_dict = values['requests'].dict()
-            return Spec(**{
-                cls._validate_minmax(
-                    request=requests_dict[type],
-                    limit=value,
-                )
-                if type in requests_dict else value
-                for type, value in v.dict().items()
-            })
-
-
+        updates = {}
+        for field in ("cpu", "memory", "gpu"):
+            request = getattr(self.requests, field)
+            limit = getattr(self.limits, field)
+            if request is not None and limit is not None and limit < request:
+                updates[field] = request
+        if updates:
+            self.limits = self.limits.model_copy(update=updates)
+        return self

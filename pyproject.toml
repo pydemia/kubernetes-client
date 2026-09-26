@@ -4,17 +4,23 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kubernetes-client"
-version = "0.1.8"
+version = "0.1.9"
 description = "High-level functional API for Kubernetes Resources and 3rd party CRDs, based on the official kubernetes-client, and more."
-requires-python = ">=3.8"
+requires-python = ">=3.10,<3.15"
 authors = [{email = "pydemia@gmail.com"}]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
 dependencies = [
     "mypy",
     "coverage",
     "pytest-cov",
-    "kubernetes",
-    "table-logger",
-    "pydantic",
+    "kubernetes>=36.0.3,<38",
+    "pydantic>=2.13.5,<3",
 ]
 
 [tool.setuptools]

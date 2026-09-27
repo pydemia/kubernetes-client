@@ -1,0 +1,533 @@
+Source: https://skills.pydemia.ai/skills/software-engineering
+Retrieved: 2026-09-27 KST
+Role: read-only Hub body snapshot, not authored project policy
+
+General
+
+Follow existing repository conventions before introducing new ones.
+
+For coding tasks, apply the relevant rules from the
+pydemia coding convention.
+Read the dictionary and the language or design references needed for the task.
+Current explicit user decisions take precedence within their scope; do not
+infer a global preference from another project's tooling.
+
+Before changing anything, inspect the relevant implementation, tests,
+configuration, documentation, callers, and consumers as needed. Verify behavior
+from the repository rather than inferring it from filenames or assumptions.
+
+Prefer the smallest complete change that satisfies the request.
+
+When modifying existing code, reuse its implementation and control flow where
+practical. If one operation must run for several inputs, consider keeping the
+operation focused on one input and iterating at its caller. Restructure the
+existing flow only when it has a clear correctness, readability, or
+maintainability benefit.
+
+Do not:
+
+
+refactor or reformat unrelated code;
+
+redesign working components without a concrete need;
+
+introduce speculative requirements or abstractions;
+
+change public behavior unless required;
+
+silently fix unrelated issues.
+
+
+When implementation is requested, complete the implementation rather than
+stopping at a plan. When the request is limited to analysis, review, or design,
+do not modify files unless explicitly requested.
+
+Model and Effort Recommendations
+
+At the start of planning, design, implementation, or validation, and when
+entering a project phase, briefly recommend a model and reasoning effort for
+the upcoming work. Include the stage, actual phase name when present, and one
+concrete reason based on ambiguity, dependencies, failure impact, or scope.
+Recommend once per transition; do not repeat it on every progress update.
+
+When preparing a phased development plan, include a compact recommendation
+table for every actual phase, with planning, design, implementation, and
+validation columns. Mark stages outside that phase's scope as not applicable.
+Use the project's phase names and tasks; do not invent phases to fill a table.
+Within a phase, identify tasks needing a different setting instead of applying
+the highest setting to all work.
+
+Use these Astra/Sol starting points when those are the user's model choices.
+These are workflow recommendations, not measured performance guarantees.
+
+StageSuggested modelEffortAdjustment for the actual work
+Planninggpt-6-astrahighUse Sol / medium for a small, well-defined scope.
+Designgpt-6-astrahighUse Sol / medium when applying an established design without new interface or state decisions.
+Implementationgpt-5.6-solmediumUse Sol / high for difficult integration; Astra / high for concurrency, recovery, or unresolved semantic behavior.
+Validationgpt-5.6-solhighUse Sol / medium for routine checks; Astra / high for cross-component reasoning, release decisions, or difficult failure analysis.
+
+Use low for mechanical edits when appropriate. Recommend xhigh only when
+the task requires unusually deep analysis or a specific unresolved problem
+justifies escalation. Do not default to max or ultra. Respect explicit user
+preferences and constraints. Do not promise token savings, speedups, or price
+ratios without supporting measurements or current pricing.
+
+The user changes the settings manually. Do not change model configuration or
+route work to subagents to select a model. Immediately after the
+recommendation, report the model and reasoning effort actually applied to the
+current task when trusted runtime metadata exposes them. If either value is
+not exposed, report that field as unavailable; do not infer it from output
+style, the recommendation, defaults, or a model family name. This report is
+informational: do not compare it with the recommendation, claim the
+recommendation was applied, request confirmation or screenshots, or wait for
+a setting change. Continue the authorized work after reporting it.
+
+Example: "P2 구현 권장: gpt-5.6-sol / medium. 확정된 인터페이스에 따른 구현입니다.
+동시성 제어 작업은 gpt-6-astra / high를 권장합니다. 현재 적용: gpt-5.6-sol /
+medium. 설정은 직접 변경하시면 됩니다."
+
+Model names and supported efforts can change. For a requested model-catalog
+update, consult the official model guide.
+Do not turn the runtime metadata report into a settings verification workflow.
+
+Code Design
+
+Optimize primarily for correctness, readability, traceability,
+maintainability, and simplicity.
+
+Prefer explicit control flow. A reader should be able to determine where a
+value came from, who changed it, why a branch was selected, where an error
+originated, and which component owns a responsibility.
+
+Avoid hiding important behavior behind:
+
+
+mixins or deep inheritance;
+
+implicit callbacks;
+
+global mutable state;
+
+unnecessary registries, decorators, or dependency injection;
+
+magic configuration;
+
+forwarding layers that add no meaningful behavior.
+
+
+Prefer composition when it makes behavior easier to trace.
+
+Do not introduce a class, interface, protocol, wrapper, factory, helper, or
+module unless it solves a concrete problem such as meaningful duplication,
+responsibility isolation, an actual extension point, dependency isolation, or
+independent testability.
+
+"May be useful later" is not sufficient justification.
+
+Prefer a direct implementation over a generalized one when it is simpler.
+
+Keep functions focused, but do not split them only to reduce line count.
+Extract a function when the extracted operation has a meaningful name or
+independent responsibility.
+
+Prefer typed structures to loosely structured dictionaries when the structure
+is stable and meaningful. Do not introduce a type merely to wrap a value
+without adding semantics.
+
+Naming and Terminology
+
+Names should describe actual behavior or responsibility.
+
+Prefer specific names over broad names such as manager, handler,
+processor, service, helper, utils, or common.
+
+Likewise, avoid broad verbs such as cast, convert, or normalize when a
+more precise description of the operation is available.
+
+Preserve established repository terminology unless it is incorrect or
+misleading. Use the same term for the same concept across code, tests,
+documentation, and configuration.
+
+State, Determinism, and Errors
+
+Keep semantically distinct states distinct.
+
+Where relevant, distinguish:
+
+
+not supplied;
+
+not found;
+
+empty;
+
+invalid;
+
+unsupported;
+
+unknown;
+
+contradictory;
+
+configuration failure;
+
+dependency failure;
+
+internal failure.
+
+
+Do not represent "cannot determine" as False, success, an empty result, or a
+default category unless explicitly intended.
+
+Do not silently turn failures into valid-looking results.
+
+Preserve useful context when propagating errors. Validate required
+configuration where failure is clear and useful, but do not disable unrelated
+functionality because an optional dependency is unavailable.
+
+Avoid swallowed exceptions, unbounded retries, polling, recursion, and broad
+exception handling without a concrete recovery strategy.
+
+Prefer deterministic behavior, especially for:
+
+
+classification;
+
+ranking;
+
+parsing;
+
+filtering;
+
+rule evaluation;
+
+fallback selection;
+
+retries;
+
+tests.
+
+
+Do not rely on unstable ordering, unspecified behavior, or nondeterministic
+concurrency when stable output is expected. Define an explicit tie-break rule
+when equal results require stable ordering.
+
+Compatibility and Scope
+
+Preserve existing behavior unless changing it is part of the task.
+
+Be particularly careful with:
+
+
+public APIs and schemas;
+
+CLI arguments;
+
+configuration and environment variables;
+
+defaults and status values;
+
+error semantics;
+
+persistence formats and database schemas;
+
+event payloads and workflow triggers.
+
+
+Inspect consumers before changing externally observable behavior.
+
+Do not collapse missing, null, empty, and default values unless the existing
+design treats them as equivalent.
+
+For schema or persistence changes, consider existing stored data and migration
+behavior.
+
+Do not solve a broader problem than requested. If an adjacent issue blocks the
+task, address only what is necessary to remove the blocker. Otherwise, leave it
+unchanged.
+
+Do not turn a bug fix into a cleanup project or a small feature into a
+framework.
+
+Formatting
+
+Use 79 characters as the default maximum line length for source code,
+comments, docstrings, Markdown prose, and configuration where practical.
+
+Hard-wrap ordinary Markdown prose at 79 characters.
+
+Do not split indivisible content merely to satisfy the limit. Reasonable
+exceptions include:
+
+
+URLs;
+
+hashes and generated identifiers;
+
+import paths and code symbols;
+
+literal strings that must remain unchanged;
+
+shell commands when wrapping changes semantics;
+
+Markdown tables when wrapping reduces readability.
+
+
+Use the project's chosen formatting and checking tools. This convention does
+not select a formatter.
+
+Do not reformat unrelated code merely to enforce the line limit. Keep diffs
+focused.
+
+Comments and Documentation
+
+Comments should explain non-obvious information, such as:
+
+
+why a decision is necessary;
+
+an external constraint;
+
+a compatibility requirement;
+
+an intentional deviation;
+
+a subtle invariant.
+
+
+Do not translate obvious code into prose. Keep comments and docstrings aligned
+with the implementation and remove stale explanations.
+
+Write project documentation in Korean unless the user, repository, or target
+audience requires another language.
+
+Use natural Korean technical writing. Keep established identifiers, API names,
+protocols, product names, code symbols, and technical terms in their
+conventional form when translation reduces precision.
+
+Prefer concrete subjects and verbs. Avoid unnecessary abstract nouns,
+nominalized expressions, generic introductions, conclusions, summaries,
+"future work", or repeated restatements unless the document needs them.
+
+Do not force content into an arbitrary number of sections. Use headings,
+lists, tables, bold text, and callouts only when they improve information
+structure. Do not repeat a heading in the first sentence below it.
+
+Korean Technical Terminology
+
+Do not mechanically translate English software terms into uncommon Korean
+expressions.
+
+In particular, do not mechanically translate contract as 계약.
+
+Choose the expression from its actual meaning:
+
+
+API contract
+→ API 명세 / API 인터페이스 / 요청·응답 규칙
+
+interface contract
+→ 인터페이스 규칙 / 입출력 조건
+
+behavioral contract
+→ 동작 규칙 / 보장해야 하는 동작
+
+data contract
+→ 데이터 명세 / 스키마 및 전달 규칙
+
+compatibility contract
+→ 호환성 조건 / 호환성 보장 범위
+
+
+Use 계약 only when contract itself is the established technical concept,
+such as Design by Contract, or when the project deliberately uses that term.
+
+Apply the same principle to terms such as boundary, surface, ownership,
+consumer, producer, invariant, orchestration, and artifact.
+
+Depending on context, use the established English term, a commonly used Korean
+technical term, or a concrete description of what the term means.
+
+Technical precision has priority over literal translation.
+
+Planning and Architecture
+
+Clearly distinguish:
+
+
+confirmed requirements;
+
+observed current behavior;
+
+constraints;
+
+assumptions;
+
+proposed design;
+
+optional improvements.
+
+
+Do not present assumptions as requirements or invent requirements to make a
+design look complete.
+
+Describe architecture in terms of concrete responsibilities and interactions:
+which component calls which API, where state is stored, who owns it, how
+authentication works, when processing starts, and what happens on failure.
+
+Avoid vague architecture language and unjustified infrastructure.
+
+Do not introduce a service, queue, interface, cache, event bus, or similar
+abstraction merely because it is a common pattern or might be useful later.
+Require a current requirement, measured constraint, or concrete design need.
+
+When comparing alternatives, use criteria relevant to the actual decision,
+such as implementation and operational complexity, latency, throughput,
+failure modes, consistency, deployment environment, security boundaries,
+maintenance cost, dependencies, and migration cost.
+
+Avoid generic pros-and-cons lists that could apply to any project.
+
+Diagrams
+
+Diagrams should describe the actual system.
+
+Show only components necessary to understand control flow, data flow, network
+flow, trust boundaries, persistence, ownership, or dependencies.
+
+Use the simplest suitable diagram type:
+
+
+sequence diagram for interactions over time;
+
+flowchart for branching execution;
+
+component diagram for structural relationships;
+
+deployment diagram for runtime placement.
+
+
+Do not add decorative layers or components merely to resemble a reference
+architecture.
+
+Testing and Validation
+
+When observable behavior changes, update tests where appropriate.
+
+Prefer regression tests that reproduce the actual failure or edge case. Cover
+relevant malformed, empty, missing, boundary, contradictory, dependency
+failure, and fallback cases.
+
+Do not add meaningless tests only to increase coverage.
+
+Prefer deterministic synchronization over arbitrary sleeps. Avoid unnecessary
+dependence on wall-clock timing, network availability, execution order,
+randomness, or shared mutable state.
+
+After modifying code, run the relevant repository-provided validation, such as:
+
+
+formatter;
+
+linter;
+
+type checker;
+
+unit or integration tests;
+
+build;
+
+generated-file checks.
+
+
+Never claim a check passed unless it was actually executed successfully.
+
+Distinguish clearly between:
+
+
+verified;
+
+inspected but not executed;
+
+not verified.
+
+
+If full validation cannot be performed, state exactly what remains unverified.
+
+Repository Workflow
+
+Before editing:
+
+
+locate the relevant implementation;
+
+inspect nearby conventions and tests;
+
+inspect callers, consumers, and related documentation when relevant.
+
+
+During editing:
+
+
+make the smallest coherent change;
+
+preserve unrelated behavior;
+
+avoid opportunistic refactoring;
+
+update affected tests and documentation.
+
+
+After editing:
+
+
+inspect the diff for unintended changes;
+
+remove debug code, accidental edits, and stale comments;
+
+run relevant validation;
+
+verify that documentation matches the implementation.
+
+
+Do not leave temporary debug code, commented-out implementations, placeholder
+TODOs, or unused compatibility branches unless explicitly required.
+
+External Information
+
+For information that can change by version or time, verify it from available
+sources rather than relying on memory.
+
+Prefer primary sources such as official documentation, source repositories,
+release notes, specifications, and upstream issues or pull requests.
+
+Do not invent version numbers, feature support, commands, benchmark results, or
+API behavior.
+
+When evidence is incomplete, state the uncertainty rather than filling the gap
+with a plausible answer.
+
+Final Response
+
+Keep the final response proportional to the work performed.
+
+For code changes, report:
+
+
+what changed;
+
+non-obvious implementation decisions when useful;
+
+validation actually performed;
+
+anything still unverified or incomplete.
+
+
+Refer to concrete files, functions, or components when useful.
+
+Do not repeat information already obvious from the diff.
+
+Do not claim complete support, successful tests, backward compatibility, or
+production readiness unless the relevant scope was actually verified.
+
+Do not add ceremonial sections for remaining work when nothing remains.

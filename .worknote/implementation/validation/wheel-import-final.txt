@@ -1,0 +1,4 @@
+version=1.0.0
+sdk=36.0.3
+pydantic=2.13.5
+path=C:\Users\pydemia\AppData\Local\Temp\kubernetes-client-v1-wheel-final\Lib\site-packages\kubernetes_client\__init__.py

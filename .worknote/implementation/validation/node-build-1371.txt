@@ -1,0 +1,43 @@
+Building using URL: "https://dl.k8s.io/v1.37.1/kubernetes-server-linux-arm64.tar.gz"
+Starting to build Kubernetes
+Downloading "https://dl.k8s.io/v1.37.1/kubernetes-server-linux-arm64.tar.gz"
+Finished building Kubernetes
+Building node image ...
+Building in container: kind-build-1790505556-1137433484
+time="2026-09-27T10:39:32Z" level=warning msg="DEPRECATION: The support for cgroup v1 is deprecated since containerd v2.2 and will be removed by no later than May 2029. Upgrade the host to use cgroup v2."
+time="2026-09-27T10:39:32Z" level=warning msg="DEPRECATION: The support for cgroup v1 is deprecated since containerd v2.2 and will be removed by no later than May 2029. Upgrade the host to use cgroup v2."
+time="2026-09-27T10:39:32Z" level=warning msg="DEPRECATION: The support for cgroup v1 is deprecated since containerd v2.2 and will be removed by no later than May 2029. Upgrade the host to use cgroup v2."
+time="2026-09-27T10:39:32Z" level=warning msg="DEPRECATION: The support for cgroup v1 is deprecated since containerd v2.2 and will be removed by no later than May 2029. Upgrade the host to use cgroup v2."
+import 2026 09 27@sha256:073e7da3c20cca5	saved	
+application/vnd.oci.image.index.v1+json sha256:073e7da3c20cca536bc2c57ab711bc5a2015251cbd0059efa5645ebf98a7d532
+Importing	elapsed: 5.5 s	total:   0.0 B	(0.0 B/s)	
+import 2026 09 27@sha256:073e7da3c20cca5	saved	
+registry.k8s.io/kube proxy arm64:v1.37.1	saved	
+application/vnd.oci.image.index.v1+json sha256:073e7da3c20cca536bc2c57ab711bc5a2015251cbd0059efa5645ebf98a7d532
+application/vnd.docker.distribution.manifest.v2+json sha256:e7b0994c69794b3008f4fceeb83c1493a35d12112db4f773972c7fa11d15fe77
+Importing	elapsed: 5.5 s	total:   0.0 B	(0.0 B/s)	
+import 2026 09 27@sha256:d52330e9731637f	saved	
+application/vnd.oci.image.index.v1+json sha256:d52330e9731637f445e7dc3eed38b4ff31a77ae685611b4e22b741edeca6d8d0
+Importing	elapsed: 8.4 s	total:   0.0 B	(0.0 B/s)	
+import 2026 09 27@sha256:d52330e9731637f	saved	
+registry.k8s.io/kube scheduler arm64:v1.	saved	
+application/vnd.oci.image.index.v1+json sha256:d52330e9731637f445e7dc3eed38b4ff31a77ae685611b4e22b741edeca6d8d0
+application/vnd.docker.distribution.manifest.v2+json sha256:3c8eb9105f0c23e1fb9d260628ae8dc0d0ac01df16a36b9b9ee0d04d797439dd
+Importing	elapsed: 8.4 s	total:   0.0 B	(0.0 B/s)	
+import 2026 09 27@sha256:754fa7b19427d0d	saved	
+application/vnd.oci.image.index.v1+json sha256:754fa7b19427d0d118cb950e75d4f9b091d50d57f0d27146baa7767d883d9848
+Importing	elapsed: 9.3 s	total:   0.0 B	(0.0 B/s)	
+import 2026 09 27@sha256:754fa7b19427d0d	saved	
+registry.k8s.io/kube controller manager 	saved	
+application/vnd.oci.image.index.v1+json sha256:754fa7b19427d0d118cb950e75d4f9b091d50d57f0d27146baa7767d883d9848
+application/vnd.docker.distribution.manifest.v2+json sha256:ff76b926fbe85911afaac31c7e7c1b3e632725d4bdf431071f19d481f2dc53ea
+Importing	elapsed: 9.3 s	total:   0.0 B	(0.0 B/s)	
+import 2026 09 27@sha256:56949e79c7555f0	saved	
+application/vnd.oci.image.index.v1+json sha256:56949e79c7555f0d3b5d2cd65bd3642d5aa0fdaabf83246d204df4a0c0ffcb43
+Importing	elapsed: 9.7 s	total:   0.0 B	(0.0 B/s)	
+import 2026 09 27@sha256:56949e79c7555f0	saved	
+registry.k8s.io/kube apiserver arm64:v1.	saved	
+application/vnd.oci.image.index.v1+json sha256:56949e79c7555f0d3b5d2cd65bd3642d5aa0fdaabf83246d204df4a0c0ffcb43
+application/vnd.docker.distribution.manifest.v2+json sha256:d49b0985dfe1022383afa2325c9dd1a6278b00705b48d42118cf4e3929023722
+Importing	elapsed: 9.7 s	total:   0.0 B	(0.0 B/s)	
+Image "kc-v1-node:v1.37.1" build completed.

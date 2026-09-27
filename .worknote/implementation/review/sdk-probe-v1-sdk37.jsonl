@@ -1,0 +1,12 @@
+{"probe": "sdk", "result": "37.0.0b1"}
+{"probe": "runtime", "result": {"python": "3.14.4 (main, Apr 14 2026, 14:30:57) [MSC v.1944 64 bit (AMD64)]", "pydantic": "2.13.5", "urllib3": "2.8.0"}}
+{"probe": "snapshot_hashes", "result": true}
+{"probe": "core_unrelated_group_503", "result": {"exception": "DiscoveryRequestError", "message": "Kubernetes API request failed (HTTP 503)", "status": 503, "routes": ["/version", "/apis", "/api/v1", "/apis/apps/v1"]}}
+{"probe": "synthetic_list_kind", "result": {"value": {"metadata": {"name": "demo", "uid": "uid"}}, "routes": ["/version", "/apis", "/api/v1", "/apis/apps/v1", "/api/v1/namespaces/default/configmaps/demo"]}}
+{"probe": "malformed_core_resource_kind", "result": {"exception": "ResourceNotServedError", "message": "Resource not served: v1/ConfigMap", "status": null, "routes": ["/version", "/apis", "/api/v1", "/apis/apps/v1", "/version", "/apis", "/api/v1", "/apis/apps/v1"]}}
+{"probe": "malformed_preferred_version", "result": {"value": {"metadata": {"name": "demo", "uid": "uid"}}, "routes": ["/version", "/apis", "/apis/apps/v1", "/apis/apps/v1/namespaces/default/deployments/demo"]}}
+{"probe": "missing_discovery_kind", "result": {"exception": "KeyError", "message": "'kind'", "status": null, "routes": ["/version", "/apis", "/api/v1"]}}
+{"probe": "borrowed_existing_pool_retry_PUT", "result": {"manager_retries": "Retry(total=0, connect=None, read=None, redirect=None, status=None)", "pool_retries_total": 1, "accepted": true, "response": {"metadata": {"name": "demo"}}, "wire_request_count": 2}}
+{"probe": "owned_no_retry_disconnect_PUT", "result": {"manager_retries": "Retry(total=0, connect=None, read=None, redirect=None, status=None)", "pool_retries_total": 0, "accepted": true, "exception": "MaxRetryError", "wire_request_count": 1}}
+{"probe": "borrowed_existing_pool_retry_DELETE", "result": {"manager_retries": "Retry(total=0, connect=None, read=None, redirect=None, status=None)", "pool_retries_total": 1, "accepted": true, "response": "requested", "wire_request_count": 2}}
+{"probe": "owned_no_retry_disconnect_DELETE", "result": {"manager_retries": "Retry(total=0, connect=None, read=None, redirect=None, status=None)", "pool_retries_total": 0, "accepted": true, "exception": "MaxRetryError", "wire_request_count": 1}}

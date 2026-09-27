@@ -1,0 +1,122 @@
+name: Verify interface
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.10', '3.11', '3.12', '3.13', '3.14']
+        sdk: ['36.0.3', '37.0.0b1']
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install exact SDK and developer dependencies
+        run: python -m pip install '.[dev]' 'kubernetes==${{ matrix.sdk }}'
+      - name: Run regression, interface and socket tests
+        run: python -m unittest discover -s tests -v
+      - name: Check new API types
+        if: matrix.python == '3.14' && matrix.sdk == '36.0.3'
+        run: >-
+          python -m mypy kubernetes_client/client.py
+          kubernetes_client/resources.py kubernetes_client/watch.py
+          kubernetes_client/manifests.py kubernetes_client/errors.py
+          --follow-imports=skip --ignore-missing-imports --check-untyped-defs
+      - name: Build, inspect and install wheel
+        if: matrix.python == '3.14' && matrix.sdk == '36.0.3'
+        run: |
+          python -m build
+          python -m twine check --strict dist/*
+          python -m venv "$RUNNER_TEMP/wheel-check"
+          "$RUNNER_TEMP/wheel-check/bin/pip" install dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/wheel-check/bin/python" - <<'PY'
+          from importlib.metadata import version
+          from kubernetes_client import KubernetesClient, KubernetesManager
+          from kubernetes_client.__version__ import __version__
+          assert version("kubernetes-client") == __version__ == "1.0.0"
+          PY
+
+  integration:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - version: '1.35.8'
+            digest: 07b2536e30b803ed61d1677a79df6115f798ce64c80f9e22f6ed45afd09323c0
+            sdk: '36.0.3'
+          - version: '1.36.4'
+            digest: 099e049362a1526b2db71494e1947aae99bd16290d7c895f2b7ea312e3cbfaed
+            sdk: '36.0.3'
+          - version: '1.37.1'
+            sdk: '36.0.3'
+          - version: '1.37.1'
+            sdk: '37.0.0b1'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.14'
+      - name: Install dependencies and kind
+        run: |
+          python -m pip install '.[dev]' 'kubernetes==${{ matrix.sdk }}'
+          curl -fsSL https://kind.sigs.k8s.io/dl/v0.33.0/kind-linux-amd64 -o kind
+          chmod +x kind
+      - name: Build latest patch node from official release
+        if: matrix.version == '1.37.1'
+        run: |
+          curl -fsSL https://dl.k8s.io/v1.37.1/kubernetes-server-linux-amd64.tar.gz -o kubernetes-server-linux-amd64.tar.gz
+          curl -fsSL https://dl.k8s.io/v1.37.1/kubernetes-server-linux-amd64.tar.gz.sha256 -o release.sha256
+          echo "$(cat release.sha256)  kubernetes-server-linux-amd64.tar.gz" | sha256sum --check
+          ./kind build node-image --type file --arch amd64 --image wrapper-node:v1.37.1 --base-image kindest/base:v20260820-69b56db7@sha256:8098fa3cae05bc15d9c4b93a566d19e1f8e65a25e26ebeb993b6cb41142cf791 kubernetes-server-linux-amd64.tar.gz
+      - name: Select tested node image
+        env:
+          SERVER_VERSION: ${{ matrix.version }}
+          NODE_DIGEST: ${{ matrix.digest }}
+        run: |
+          if [ "$SERVER_VERSION" = '1.37.1' ]; then
+            echo 'NODE_IMAGE=wrapper-node:v1.37.1' >> "$GITHUB_ENV"
+          else
+            echo "NODE_IMAGE=kindest/node:v$SERVER_VERSION@sha256:$NODE_DIGEST" >> "$GITHUB_ENV"
+          fi
+      - name: Create disposable cluster
+        run: >-
+          ./kind create cluster --name wrapper-ci
+          --image "$NODE_IMAGE"
+          --kubeconfig "$RUNNER_TEMP/kubeconfig" --wait 120s
+      - name: Run live integration and guide example
+        env:
+          KUBERNETES_CLIENT_TEST_CONFIG: ${{ runner.temp }}/kubeconfig
+          KUBERNETES_CLIENT_TEST_SERVER_VERSION: v${{ matrix.version }}
+        run: |
+          python -m unittest discover -s tests/integration -v
+          python examples/quickstart.py --kubeconfig "$KUBERNETES_CLIENT_TEST_CONFIG" --namespace guide-example
+          python -O examples/quickstart.py --kubeconfig "$KUBERNETES_CLIENT_TEST_CONFIG" --namespace guide-optimized
+      - name: Save diagnostics
+        if: failure()
+        run: ./kind export logs "$RUNNER_TEMP/cluster-logs" --name wrapper-ci
+      - name: Remove cluster
+        if: always()
+        run: ./kind delete cluster --name wrapper-ci

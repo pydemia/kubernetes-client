@@ -1,0 +1,14 @@
+test_builtin_groups_and_dra (test_cluster.ClusterTests.test_builtin_groups_and_dra) ... ok
+test_crds_scope_versions_unknown_fields_and_schema (test_cluster.ClusterTests.test_crds_scope_versions_unknown_fields_and_schema) ... ok
+test_finalizer_uid_race_timeout_and_cancel (test_cluster.ClusterTests.test_finalizer_uid_race_timeout_and_cancel) ... ok
+test_get_only_rbac_and_discovery_denial (test_cluster.ClusterTests.test_get_only_rbac_and_discovery_denial) ... ok
+test_latest_stable_cluster_trust_bundle (test_cluster.ClusterTests.test_latest_stable_cluster_trust_bundle) ... ok
+test_namespace_crud_pagination_and_watch (test_cluster.ClusterTests.test_namespace_crud_pagination_and_watch) ... ok
+test_pod_and_deployment_waits (test_cluster.ClusterTests.test_pod_and_deployment_waits) ... ok
+test_secret_ssa_conflict_and_force (test_cluster.ClusterTests.test_secret_ssa_conflict_and_force) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 20.849s
+
+OK
+LIVE server=v1.37.1 namespace=kc-v1-96bc4b88 image=registry.k8s.io/pause:3.10@sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a

@@ -1,0 +1,38 @@
+Installed 27 packages in 2.20s
+test_build_resource_spec_uses_kubernetes_quantities (test_compatibility.CompatibilityTests.test_build_resource_spec_uses_kubernetes_quantities) ... ok
+test_patch_namespace_uses_model_metadata (test_compatibility.CompatibilityTests.test_patch_namespace_uses_model_metadata) ... ok
+test_prepare_namespace_handles_missing_existing_labels (test_compatibility.CompatibilityTests.test_prepare_namespace_handles_missing_existing_labels) ... ok
+test_resource_limits_are_at_least_requests (test_compatibility.CompatibilityTests.test_resource_limits_are_at_least_requests) ... ok
+test_resource_quantities_and_alias (test_compatibility.CompatibilityTests.test_resource_quantities_and_alias) ... ok
+test_version_and_bearer_configuration (test_compatibility.CompatibilityTests.test_version_and_bearer_configuration) ... ok
+test_watch_pod_accepts_model_and_dict_events (test_compatibility.CompatibilityTests.test_watch_pod_accepts_model_and_dict_events) ... ok
+test_404_classification_and_delete_preconditions (test_interface.InterfaceTests.test_404_classification_and_delete_preconditions) ... ok
+test_auth_isolation_and_lazy_discovery (test_interface.InterfaceTests.test_auth_isolation_and_lazy_discovery) ... ok
+test_borrowed_transport_and_close (test_interface.InterfaceTests.test_borrowed_transport_and_close) ... ok
+test_core_lookup_does_not_visit_other_version_endpoint (test_interface.InterfaceTests.test_core_lookup_does_not_visit_other_version_endpoint) ... ok
+test_custom_transport_is_rejected (test_interface.InterfaceTests.test_custom_transport_is_rejected) ... ok
+test_discovery_errors_are_not_missing_resources (test_interface.InterfaceTests.test_discovery_errors_are_not_missing_resources) ... ok
+test_existing_pool_retry_policy_is_rejected_without_mutation (test_interface.InterfaceTests.test_existing_pool_retry_policy_is_rejected_without_mutation) ... ok
+test_kubeconfig_factories_do_not_set_global_config (test_interface.InterfaceTests.test_kubeconfig_factories_do_not_set_global_config) ... ok
+test_malformed_discovery_is_explicit (test_interface.InterfaceTests.test_malformed_discovery_is_explicit) ... ok
+test_model_uses_wire_aliases (test_interface.InterfaceTests.test_model_uses_wire_aliases) ... ok
+test_namespace_and_unknown_fields_are_preserved (test_interface.InterfaceTests.test_namespace_and_unknown_fields_are_preserved) ... ok
+test_negative_lookup_refreshes_once_and_stale_handle_refreshes (test_interface.InterfaceTests.test_negative_lookup_refreshes_once_and_stale_handle_refreshes) ... ok
+test_owned_cache_response_and_pool_cleanup (test_interface.InterfaceTests.test_owned_cache_response_and_pool_cleanup) ... ok
+test_pagination_and_snapshot_errors (test_interface.InterfaceTests.test_pagination_and_snapshot_errors) ... ok
+test_single_object_names_and_boolean_options (test_interface.InterfaceTests.test_single_object_names_and_boolean_options) ... ok
+test_stale_deployment_failure_is_not_current_generation_failure (test_interface.InterfaceTests.test_stale_deployment_failure_is_not_current_generation_failure) ... ok
+test_wait_identity_races_and_deadline (test_interface.InterfaceTests.test_wait_identity_races_and_deadline) ... ok
+test_watch_bookmarks_malformed_error_and_cleanup (test_interface.InterfaceTests.test_watch_bookmarks_malformed_error_and_cleanup) ... ok
+test_watch_framing_and_iterator_close_before_next (test_interface.InterfaceTests.test_watch_framing_and_iterator_close_before_next) ... ok
+test_write_queries_and_empty_json_patch (test_interface.InterfaceTests.test_write_queries_and_empty_json_patch) ... ok
+test_pure_helpers_and_secret_encoding (test_interface.ManifestTests.test_pure_helpers_and_secret_encoding) ... ok
+test_resource_quantities_do_not_adjust_limits (test_interface.ManifestTests.test_resource_quantities_do_not_adjust_limits) ... ok
+test_idle_watch_honors_socket_read_timeout (test_transport.SocketTests.test_idle_watch_honors_socket_read_timeout) ... ok
+test_put_and_delete_disconnect_are_not_replayed (test_transport.SocketTests.test_put_and_delete_disconnect_are_not_replayed) ... ok
+test_stop_unblocks_idle_watch_and_cleans_up (test_transport.SocketTests.test_stop_unblocks_idle_watch_and_cleans_up) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 3.734s
+
+OK

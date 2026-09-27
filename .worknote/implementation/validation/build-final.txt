@@ -1,0 +1,155 @@
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=61
+  - wheel
+* Getting build dependencies for sdist...
+running egg_info
+writing kubernetes_client.egg-info\PKG-INFO
+writing dependency_links to kubernetes_client.egg-info\dependency_links.txt
+writing requirements to kubernetes_client.egg-info\requires.txt
+writing top-level names to kubernetes_client.egg-info\top_level.txt
+reading manifest file 'kubernetes_client.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'kubernetes_client.egg-info\SOURCES.txt'
+* Installed build dependency versions:
+  - setuptools==84.0.0
+  - wheel==0.48.0
+* Building sdist...
+running sdist
+running egg_info
+writing kubernetes_client.egg-info\PKG-INFO
+writing dependency_links to kubernetes_client.egg-info\dependency_links.txt
+writing requirements to kubernetes_client.egg-info\requires.txt
+writing top-level names to kubernetes_client.egg-info\top_level.txt
+reading manifest file 'kubernetes_client.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'kubernetes_client.egg-info\SOURCES.txt'
+running check
+creating kubernetes_client-1.0.0
+creating kubernetes_client-1.0.0\docs
+creating kubernetes_client-1.0.0\examples
+creating kubernetes_client-1.0.0\kubernetes_client
+creating kubernetes_client-1.0.0\kubernetes_client.egg-info
+creating kubernetes_client-1.0.0\tests
+creating kubernetes_client-1.0.0\tests\integration
+copying files to kubernetes_client-1.0.0...
+copying LICENSE -> kubernetes_client-1.0.0
+copying MANIFEST.in -> kubernetes_client-1.0.0
+copying README.md -> kubernetes_client-1.0.0
+copying RECOVERY.md -> kubernetes_client-1.0.0
+copying pyproject.toml -> kubernetes_client-1.0.0
+copying docs\migration.md -> kubernetes_client-1.0.0\docs
+copying docs\usage.md -> kubernetes_client-1.0.0\docs
+copying docs\validation.md -> kubernetes_client-1.0.0\docs
+copying examples\quickstart.py -> kubernetes_client-1.0.0\examples
+copying kubernetes_client\__init__.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\__version__.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\base.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\client.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\enums.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\errors.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\kfserving.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\manifests.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\resources.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\schema.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\utils.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client\watch.py -> kubernetes_client-1.0.0\kubernetes_client
+copying kubernetes_client.egg-info\PKG-INFO -> kubernetes_client-1.0.0\kubernetes_client.egg-info
+copying kubernetes_client.egg-info\SOURCES.txt -> kubernetes_client-1.0.0\kubernetes_client.egg-info
+copying kubernetes_client.egg-info\dependency_links.txt -> kubernetes_client-1.0.0\kubernetes_client.egg-info
+copying kubernetes_client.egg-info\requires.txt -> kubernetes_client-1.0.0\kubernetes_client.egg-info
+copying kubernetes_client.egg-info\top_level.txt -> kubernetes_client-1.0.0\kubernetes_client.egg-info
+copying tests\test_compatibility.py -> kubernetes_client-1.0.0\tests
+copying tests\test_interface.py -> kubernetes_client-1.0.0\tests
+copying tests\test_transport.py -> kubernetes_client-1.0.0\tests
+copying tests\integration\test_cluster.py -> kubernetes_client-1.0.0\tests\integration
+Writing kubernetes_client-1.0.0\setup.cfg
+Creating tar archive
+removing 'kubernetes_client-1.0.0' (and everything under it)
+* Building wheel from sdist
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=61
+  - wheel
+* Getting build dependencies for wheel...
+running egg_info
+writing kubernetes_client.egg-info\PKG-INFO
+writing dependency_links to kubernetes_client.egg-info\dependency_links.txt
+writing requirements to kubernetes_client.egg-info\requires.txt
+writing top-level names to kubernetes_client.egg-info\top_level.txt
+reading manifest file 'kubernetes_client.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'kubernetes_client.egg-info\SOURCES.txt'
+* Installed build dependency versions:
+  - setuptools==84.0.0
+  - wheel==0.48.0
+* Building wheel...
+running bdist_wheel
+running build
+running build_py
+creating build\lib\kubernetes_client
+copying kubernetes_client\base.py -> build\lib\kubernetes_client
+copying kubernetes_client\client.py -> build\lib\kubernetes_client
+copying kubernetes_client\enums.py -> build\lib\kubernetes_client
+copying kubernetes_client\errors.py -> build\lib\kubernetes_client
+copying kubernetes_client\kfserving.py -> build\lib\kubernetes_client
+copying kubernetes_client\manifests.py -> build\lib\kubernetes_client
+copying kubernetes_client\resources.py -> build\lib\kubernetes_client
+copying kubernetes_client\schema.py -> build\lib\kubernetes_client
+copying kubernetes_client\utils.py -> build\lib\kubernetes_client
+copying kubernetes_client\watch.py -> build\lib\kubernetes_client
+copying kubernetes_client\__init__.py -> build\lib\kubernetes_client
+copying kubernetes_client\__version__.py -> build\lib\kubernetes_client
+running egg_info
+writing kubernetes_client.egg-info\PKG-INFO
+writing dependency_links to kubernetes_client.egg-info\dependency_links.txt
+writing requirements to kubernetes_client.egg-info\requires.txt
+writing top-level names to kubernetes_client.egg-info\top_level.txt
+reading manifest file 'kubernetes_client.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'kubernetes_client.egg-info\SOURCES.txt'
+installing to build\bdist.win-amd64\wheel
+running install
+running install_lib
+creating build\bdist.win-amd64\wheel
+creating build\bdist.win-amd64\wheel\kubernetes_client
+copying build\lib\kubernetes_client\base.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\client.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\enums.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\errors.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\kfserving.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\manifests.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\resources.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\schema.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\utils.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\watch.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\__init__.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+copying build\lib\kubernetes_client\__version__.py -> build\bdist.win-amd64\wheel\.\kubernetes_client
+running install_egg_info
+Copying kubernetes_client.egg-info to build\bdist.win-amd64\wheel\.\kubernetes_client-1.0.0-py3.14.egg-info
+running install_scripts
+creating build\bdist.win-amd64\wheel\kubernetes_client-1.0.0.dist-info\WHEEL
+creating 'C:\\Users\\pydemia\\git\\kubernetes-client\\dist\\.tmp-cyejo5us\\kubernetes_client-1.0.0-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+adding 'kubernetes_client/__init__.py'
+adding 'kubernetes_client/__version__.py'
+adding 'kubernetes_client/base.py'
+adding 'kubernetes_client/client.py'
+adding 'kubernetes_client/enums.py'
+adding 'kubernetes_client/errors.py'
+adding 'kubernetes_client/kfserving.py'
+adding 'kubernetes_client/manifests.py'
+adding 'kubernetes_client/resources.py'
+adding 'kubernetes_client/schema.py'
+adding 'kubernetes_client/utils.py'
+adding 'kubernetes_client/watch.py'
+adding 'kubernetes_client-1.0.0.dist-info/licenses/LICENSE'
+adding 'kubernetes_client-1.0.0.dist-info/METADATA'
+adding 'kubernetes_client-1.0.0.dist-info/WHEEL'
+adding 'kubernetes_client-1.0.0.dist-info/top_level.txt'
+adding 'kubernetes_client-1.0.0.dist-info/RECORD'
+removing build\bdist.win-amd64\wheel
+Successfully built kubernetes_client-1.0.0.tar.gz and kubernetes_client-1.0.0-py3-none-any.whl

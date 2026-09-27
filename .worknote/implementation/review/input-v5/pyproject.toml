@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kubernetes-client"
+version = "1.0.0"
+description = "High-level functional API for Kubernetes Resources and 3rd party CRDs, based on the official kubernetes-client, and more."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+authors = [{email = "pydemia@gmail.com"}]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+    "kubernetes>=36.0.3,<38",
+    "pydantic>=2.13.5,<3",
+]
+
+[project.optional-dependencies]
+dev = ["mypy", "coverage", "pytest-cov", "build", "twine", "cryptography"]
+
+[project.urls]
+Repository = "https://github.com/pydemia/kubernetes-client"
+Documentation = "https://github.com/pydemia/kubernetes-client/blob/v1.0.0/docs/usage.md"
+Issues = "https://github.com/pydemia/kubernetes-client/issues"
+
+[tool.setuptools]
+packages = ["kubernetes_client"]

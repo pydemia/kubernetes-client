@@ -4,6 +4,7 @@
 `codex/v1-interface`이며 최종 코드 입력은
 `review/input-v3.sha256`과 복원 가능한 `review/input-v3/`에 고정했다.
 preview 배포 조건만 분리한 후속 CI 입력은 `review/input-v4/`다.
+PyPI README의 절대 가이드 링크와 project.urls의 입력은 `review/input-v5/`다.
 CI commit, tag, PyPI 공개 결과는 아래 배포 기록에 이어서 남긴다.
 
 ## 적용 기준과 버전 확인
@@ -107,7 +108,14 @@ preview 통과는 안정판 지원 선언으로 확장하지 않는다.
 
 ## 배포 상태
 
-GitHub Actions와 PyPI 공개·공개 파일 설치는 아직 실행 전이다.
+GitHub Actions [preflight 실행](https://github.com/pydemia/kubernetes-client/actions/runs/36313840842)은
+`398d3601a4b888303de33b8e956eae4abdc39ba6`에서 14개 job이 모두 성공했다.
+preview 6개도 개별 success를 확인했다. Linux amd64의 실제 1.35.8/1.36.4/1.37.1,
+Python 3.10–3.14 양 SDK unit과 package lane을 실행했으며
+`validation/github-preflight.json`에 job 원문 metadata를 보존했다.
+이후 변경은 README 링크와 project.urls, 리뷰·실행 기록뿐이며 runtime 코드는 같다.
+최종 tag를 publish workflow에서 다시 검증한다. PyPI 공개·공개 파일 설치는 아직
+실행 전이다.
 `verification.yml`의 안정 SDK unit/package/live cluster는 필수 배포 조건이며
 preview job만 continue-on-error로 분리했다. publish는 tag checkout과 version
 일치를 확인하고 기존 pypi environment Trusted Publishing을 사용한다.

@@ -10,6 +10,7 @@
 | input-v2 | 최초 지적 수정·가이드·배포 workflow | usability/sdk/validation-v2.md |
 | input-v3 | SDK-I04 잔존, US-04/05, latest patch 검증 설정 | usability/sdk/validation-v3.md |
 | input-v4 | preview job의 배포 조건 분리, 검증 가이드 2개 파일 | validation-v4.md |
+| input-v5 | PyPI README의 절대 가이드 URL과 project.urls | usability-v5.md |
 
 사용성 reviewer는 facade 작업 완료·이관·예제, SDK reviewer는 정확한 GVK,
 discovery·serializer·transport 수명, 검증 reviewer는 watch/wait 경합·오류·

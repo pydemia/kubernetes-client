@@ -133,7 +133,7 @@ running install_egg_info
 Copying kubernetes_client.egg-info to build\bdist.win-amd64\wheel\.\kubernetes_client-1.0.0-py3.14.egg-info
 running install_scripts
 creating build\bdist.win-amd64\wheel\kubernetes_client-1.0.0.dist-info\WHEEL
-creating 'C:\\Users\\pydemia\\git\\kubernetes-client\\dist\\.tmp-cyejo5us\\kubernetes_client-1.0.0-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+creating 'C:\\Users\\pydemia\\git\\kubernetes-client\\dist\\.tmp-zcxb1vr3\\kubernetes_client-1.0.0-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
 adding 'kubernetes_client/__init__.py'
 adding 'kubernetes_client/__version__.py'
 adding 'kubernetes_client/base.py'

@@ -1,0 +1,23 @@
+integration (1.37.1, 37.0.0b1)	Build latest patch node from official release	2026-09-27T10:52:10.3702270Z kubernetes-server-linux-amd64.tar.gz: OK
+integration (1.37.1, 37.0.0b1)	Run live integration and guide example	2026-09-27T10:53:21.9096613Z Ran 8 tests in 18.147s
+integration (1.37.1, 37.0.0b1)	Run live integration and guide example	2026-09-27T10:53:21.9104917Z LIVE server=v1.37.1 namespace=kc-v1-832aa040 image=registry.k8s.io/pause:3.10@sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a
+unit (3.13, 37.0.0b1)	Run regression, interface and socket tests	2026-09-27T10:51:27.7393824Z Ran 33 tests in 2.759s
+integration (1.36.4, 099e049362a1526b2db71494e1947aae99bd16290d7c895f2b7ea312e3cbfaed, 36.0.3)	UNKNOWN STEP	2026-09-27T10:52:25.1423800Z Ran 8 tests in 21.872s
+integration (1.36.4, 099e049362a1526b2db71494e1947aae99bd16290d7c895f2b7ea312e3cbfaed, 36.0.3)	UNKNOWN STEP	2026-09-27T10:52:25.1438157Z LIVE server=v1.36.4 namespace=kc-v1-e9c9ea35 image=registry.k8s.io/pause:3.10@sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a
+unit (3.11, 36.0.3)	Run regression, interface and socket tests	2026-09-27T10:51:19.3386139Z Ran 33 tests in 2.570s
+unit (3.13, 36.0.3)	Run regression, interface and socket tests	2026-09-27T10:51:15.1051825Z Ran 33 tests in 2.579s
+unit (3.14, 37.0.0b1)	Run regression, interface and socket tests	2026-09-27T10:51:24.5007592Z Ran 33 tests in 2.895s
+unit (3.10, 36.0.3)	Run regression, interface and socket tests	2026-09-27T10:51:30.0157452Z Ran 33 tests in 2.621s
+integration (1.37.1, 36.0.3)	Build latest patch node from official release	2026-09-27T10:51:11.7242383Z kubernetes-server-linux-amd64.tar.gz: OK
+integration (1.37.1, 36.0.3)	Run live integration and guide example	2026-09-27T10:52:30.8897996Z Ran 8 tests in 20.153s
+integration (1.37.1, 36.0.3)	Run live integration and guide example	2026-09-27T10:52:30.8908034Z LIVE server=v1.37.1 namespace=kc-v1-d76b66b2 image=registry.k8s.io/pause:3.10@sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a
+unit (3.14, 36.0.3)	Run regression, interface and socket tests	2026-09-27T10:51:57.9146126Z Ran 33 tests in 2.591s
+unit (3.14, 36.0.3)	Build, inspect and install wheel	2026-09-27T10:52:03.7872528Z Successfully built kubernetes_client-1.0.0.tar.gz and kubernetes_client-1.0.0-py3-none-any.whl
+unit (3.14, 36.0.3)	Build, inspect and install wheel	2026-09-27T10:52:04.1928308Z Checking dist/kubernetes_client-1.0.0-py3-none-any.whl: ^[[32mPASSED^[[0m
+unit (3.14, 36.0.3)	Build, inspect and install wheel	2026-09-27T10:52:04.1993836Z Checking dist/kubernetes_client-1.0.0.tar.gz: ^[[32mPASSED^[[0m
+integration (1.35.8, 07b2536e30b803ed61d1677a79df6115f798ce64c80f9e22f6ed45afd09323c0, 36.0.3)	UNKNOWN STEP	2026-09-27T10:52:13.5725534Z Ran 8 tests in 19.511s
+integration (1.35.8, 07b2536e30b803ed61d1677a79df6115f798ce64c80f9e22f6ed45afd09323c0, 36.0.3)	UNKNOWN STEP	2026-09-27T10:52:13.5735313Z LIVE server=v1.35.8 namespace=kc-v1-5ac62741 image=registry.k8s.io/pause:3.10@sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a
+unit (3.12, 37.0.0b1)	Run regression, interface and socket tests	2026-09-27T10:51:24.0891417Z Ran 33 tests in 2.571s
+unit (3.12, 36.0.3)	Run regression, interface and socket tests	2026-09-27T10:51:14.5086564Z Ran 33 tests in 2.648s
+unit (3.11, 37.0.0b1)	Run regression, interface and socket tests	2026-09-27T10:51:22.1920967Z Ran 33 tests in 2.587s
+unit (3.10, 37.0.0b1)	Run regression, interface and socket tests	2026-09-27T10:51:26.4111207Z Ran 33 tests in 3.290s

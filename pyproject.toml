@@ -24,5 +24,10 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["mypy", "coverage", "pytest-cov", "build", "twine", "cryptography"]
 
+[project.urls]
+Repository = "https://github.com/pydemia/kubernetes-client"
+Documentation = "https://github.com/pydemia/kubernetes-client/blob/v1.0.0/docs/usage.md"
+Issues = "https://github.com/pydemia/kubernetes-client/issues"
+
 [tool.setuptools]
 packages = ["kubernetes_client"]

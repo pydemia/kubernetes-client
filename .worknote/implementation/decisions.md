@@ -60,3 +60,9 @@ workflow 전체의 성공만으로 preview 통과를 표시하지 않고 개별 
 package archive 대조가 v4 guide 변경을 포함하지 않은 이전 sdist에서 한 번
 실패했다. guide 변경 후 재빌드하고 source 일치·포함·worknote 제외를 재검사해
 통과했다. 이 실패는 코드나 runtime 호환성 실패로 분류하지 않는다.
+
+PyPI description에서 상대 repository 링크를 해석할 기준이 없으므로 README의
+가이드·예제·RECOVERY 링크를 v1.0.0 tag의 절대 URL로 바꿨다. project.urls도
+같은 repository·documentation·issues를 지정했다. runtime 코드·예제 본문과
+의존성은 변경하지 않았다. v5 사용성 한정 검토와 재빌드·twine·archive metadata
+검사·wheel 재설치로 확인했다. tag 생성 전 원격 blob 404는 배포 후 재확인한다.

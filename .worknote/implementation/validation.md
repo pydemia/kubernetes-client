@@ -5,7 +5,7 @@
 `review/input-v3.sha256`과 복원 가능한 `review/input-v3/`에 고정했다.
 preview 배포 조건만 분리한 후속 CI 입력은 `review/input-v4/`다.
 PyPI README의 절대 가이드 링크와 project.urls의 입력은 `review/input-v5/`다.
-CI commit, tag, PyPI 공개 결과는 아래 배포 기록에 이어서 남긴다.
+CI commit, tag와 PyPI 공개 결과는 아래 배포 기록에 남겼다.
 
 ## 적용 기준과 버전 확인
 
@@ -114,8 +114,53 @@ preview 6개도 개별 success를 확인했다. Linux amd64의 실제 1.35.8/1.3
 Python 3.10–3.14 양 SDK unit과 package lane을 실행했으며
 `validation/github-preflight.json`에 job 원문 metadata를 보존했다.
 이후 변경은 README 링크와 project.urls, 리뷰·실행 기록뿐이며 runtime 코드는 같다.
-최종 tag를 publish workflow에서 다시 검증한다. PyPI 공개·공개 파일 설치는 아직
-실행 전이다.
+최종 tag를 publish workflow에서 다시 검증했다.
 `verification.yml`의 안정 SDK unit/package/live cluster는 필수 배포 조건이며
 preview job만 continue-on-error로 분리했다. publish는 tag checkout과 version
 일치를 확인하고 기존 pypi environment Trusted Publishing을 사용한다.
+
+release commit은 `fcda918cd47611dae88a29872481be6854611a75`다.
+main을 fast-forward하고 annotated v1.0.0 tag를 같은 commit에 push했다.
+원격 tag object는 `523752e2eb37784ed085be1ceb1c9505b7a4dfc3`이며 peeled commit의
+일치를 별도로 확인했다. tag를 덮어쓰거나 배포 뒤 수정하지 않았다.
+
+| 실행 | 실제 결과 |
+| --- | --- |
+| [main 검증](https://github.com/pydemia/kubernetes-client/actions/runs/36314121631) | success |
+| [v1.0.0 tag 검증](https://github.com/pydemia/kubernetes-client/actions/runs/36314123691) | success |
+| [Publish to PyPI](https://github.com/pydemia/kubernetes-client/actions/runs/36314152373) | 16개 job 모두 success; verify 14개, build, publish |
+
+publish는 `--ref main`, input tag `v1.0.0`으로 dispatch했다.
+preview 6개 job도 개별 success다. 필수 stable gate를 우회하지 않았고
+기존 Trusted Publishing 외에 수동 PyPI token을 추가하지 않았다.
+GitHub의 pypi environment protection_rules는 비어 있었다.
+job metadata는 `validation/github-publish.json`, 실제 로그의 검증 부분은
+`github-publish-summary.txt`에 보존했다.
+
+[PyPI v1.0.0](https://pypi.org/project/kubernetes-client/1.0.0/)의 JSON metadata와
+공개 파일을 직접 조회했다. 업로드 시각은 2026-09-27 10:59:52/53 UTC이며
+두 파일의 실제 다운로드 bytes가 PyPI SHA256과 일치했다.
+
+| 파일 | 공개 SHA256 |
+| --- | --- |
+| kubernetes_client-1.0.0-py3-none-any.whl | 363af5e6c97cdf45e04475d333650f438da90633a8d3ff0ea8382642a22f48e0 |
+| kubernetes_client-1.0.0.tar.gz | 62bb77c0ae44cefd5b3d47a5eb4e8b97f150f1c5544fb09c684767800416bef1 |
+
+공개 wheel의 모든 package .py bytes가 v1.0.0 Git blob과 일치하고 공개
+sdist의 README·pyproject·가이드·예제도 같은 tag와 일치했다.
+두 archive에서 .worknote가 제외됐음을 확인했다.
+로컬 Windows build와 GitHub Linux build의 archive hash가 같다고 가정하지 않았다.
+
+새 Python3.14.4 venv에 `uv pip install --no-cache --index-url
+https://pypi.org/simple --python <venv-python> kubernetes-client==1.0.0`으로
+공개 버전을 설치했다. SDK36.0.3/Pydantic2.13.5가 선택됐고
+`uv pip check`가 통과했다. 저장소 밖에서 import·metadata/모듈 버전 1.0.0,
+Secret/quantity helper·Configuration client 생성/종료·Documentation URL을
+확인하고 그 설치본을 대상으로 회귀 33개를 실행해 모두 통과했다.
+실행 원문은 `pypi-release.json`, `pypi-install.txt`, `pypi-check.txt`,
+`pypi-import.txt`, `pypi-unit.txt`, `pypi-archive.txt`다.
+
+tag 생성 후 README의 가이드·예제·RECOVERY 링크 5개는 모두 HTTP200이었다.
+`release-tag-links.txt`에 결과를 기록했다. 직접 생성한 disposable cluster
+kc-v1-135/136/137/1371은 모두 삭제했고 기존 cluster·application container는
+유지했다. 이후 commit은 실행 기록 갱신이며 공개된 runtime/tag를 바꾸지 않는다.

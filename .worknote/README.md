@@ -1,7 +1,10 @@
 # Kubernetes high-level interface 설계 기록
 
 기준일: 2026-09-27. 분석 대상: `a3031fa`, 패키지 0.9.0.
-요청 범위는 설계와 구현계획 작성이다. 라이브러리 코드는 변경하지 않는다.
+아래 설계 기록은 최초 설계·계획 요청 당시의 상태다. 구현·리뷰·테스트·배포는
+후속 goal에서 수행하며 최신 상태는
+[구현 실행 기록](implementation/README.md)과
+[검증·배포 결과](implementation/validation.md)를 따른다.
 
 | 문서 | 용도 |
 | --- | --- |

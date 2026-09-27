@@ -1,0 +1,30 @@
+verify / integration (1.35.8, 07b2536e30b803ed61d1677a79df6115f798ce64c80f9e22f6ed45afd09323c0, 36.0.3)	UNKNOWN STEP	2026-09-27T10:58:27.4643630Z Ran 8 tests in 21.071s
+verify / integration (1.35.8, 07b2536e30b803ed61d1677a79df6115f798ce64c80f9e22f6ed45afd09323c0, 36.0.3)	UNKNOWN STEP	2026-09-27T10:58:27.4654424Z LIVE server=v1.35.8 namespace=kc-v1-6261796a image=registry.k8s.io/pause:3.10@sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a
+verify / integration (1.37.1, 36.0.3)	UNKNOWN STEP	2026-09-27T10:57:22.2282755Z kubernetes-server-linux-amd64.tar.gz: OK
+verify / integration (1.37.1, 36.0.3)	UNKNOWN STEP	2026-09-27T10:58:36.3911143Z Ran 8 tests in 18.509s
+verify / integration (1.37.1, 36.0.3)	UNKNOWN STEP	2026-09-27T10:58:36.3922982Z LIVE server=v1.37.1 namespace=kc-v1-bedbbde1 image=registry.k8s.io/pause:3.10@sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a
+verify / integration (1.37.1, 37.0.0b1)	UNKNOWN STEP	2026-09-27T10:57:20.4794353Z kubernetes-server-linux-amd64.tar.gz: OK
+verify / integration (1.37.1, 37.0.0b1)	UNKNOWN STEP	2026-09-27T10:58:39.7414309Z Ran 8 tests in 19.887s
+verify / integration (1.37.1, 37.0.0b1)	UNKNOWN STEP	2026-09-27T10:58:39.7423518Z LIVE server=v1.37.1 namespace=kc-v1-4ae1ce61 image=registry.k8s.io/pause:3.10@sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a
+verify / unit (3.14, 37.0.0b1)	UNKNOWN STEP	2026-09-27T10:57:33.6840187Z Ran 33 tests in 2.767s
+verify / unit (3.11, 37.0.0b1)	UNKNOWN STEP	2026-09-27T10:57:20.3878901Z Ran 33 tests in 2.584s
+verify / integration (1.36.4, 099e049362a1526b2db71494e1947aae99bd16290d7c895f2b7ea312e3cbfaed, 36.0.3)	UNKNOWN STEP	2026-09-27T10:58:16.8748018Z Ran 8 tests in 18.520s
+verify / integration (1.36.4, 099e049362a1526b2db71494e1947aae99bd16290d7c895f2b7ea312e3cbfaed, 36.0.3)	UNKNOWN STEP	2026-09-27T10:58:16.8758525Z LIVE server=v1.36.4 namespace=kc-v1-549bf00b image=registry.k8s.io/pause:3.10@sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a
+verify / unit (3.12, 36.0.3)	UNKNOWN STEP	2026-09-27T10:57:21.3718596Z Ran 33 tests in 2.575s
+verify / unit (3.12, 37.0.0b1)	UNKNOWN STEP	2026-09-27T10:57:23.4532657Z Ran 33 tests in 3.169s
+verify / unit (3.13, 37.0.0b1)	UNKNOWN STEP	2026-09-27T10:57:23.5731448Z Ran 33 tests in 2.574s
+verify / unit (3.13, 36.0.3)	UNKNOWN STEP	2026-09-27T10:57:23.6310536Z Ran 33 tests in 2.583s
+verify / unit (3.11, 36.0.3)	UNKNOWN STEP	2026-09-27T10:57:16.2600777Z Ran 33 tests in 2.570s
+verify / unit (3.14, 36.0.3)	UNKNOWN STEP	2026-09-27T10:57:20.6546183Z Ran 33 tests in 2.577s
+verify / unit (3.14, 36.0.3)	UNKNOWN STEP	2026-09-27T10:57:25.4713541Z Successfully built kubernetes_client-1.0.0.tar.gz and kubernetes_client-1.0.0-py3-none-any.whl
+verify / unit (3.14, 36.0.3)	UNKNOWN STEP	2026-09-27T10:57:25.8095037Z Checking dist/kubernetes_client-1.0.0-py3-none-any.whl: ^[[32mPASSED^[[0m
+verify / unit (3.14, 36.0.3)	UNKNOWN STEP	2026-09-27T10:57:25.8149580Z Checking dist/kubernetes_client-1.0.0.tar.gz: ^[[32mPASSED^[[0m
+verify / unit (3.10, 36.0.3)	UNKNOWN STEP	2026-09-27T10:57:22.8425208Z Ran 33 tests in 2.573s
+verify / unit (3.10, 37.0.0b1)	UNKNOWN STEP	2026-09-27T10:57:23.6053651Z Ran 33 tests in 2.575s
+build	Run compatibility tests	2026-09-27T10:59:30.6803586Z Ran 33 tests in 3.011s
+build	Build and check distributions	2026-09-27T10:59:34.2902140Z Successfully built kubernetes_client-1.0.0.tar.gz and kubernetes_client-1.0.0-py3-none-any.whl
+build	Build and check distributions	2026-09-27T10:59:34.5596642Z Checking dist/kubernetes_client-1.0.0-py3-none-any.whl: ^[[32mPASSED^[[0m
+build	Build and check distributions	2026-09-27T10:59:34.5634396Z Checking dist/kubernetes_client-1.0.0.tar.gz: ^[[32mPASSED^[[0m
+build	Save distributions	2026-09-27T10:59:35.5474722Z Artifact distributions has been successfully uploaded! Final size is 66139 bytes. Artifact ID is 10929479292
+publish	Publish to PyPI	2026-09-27T10:59:49.3879252Z Checking dist/kubernetes_client-1.0.0-py3-none-any.whl: ^[[32mPASSED^[[0m
+publish	Publish to PyPI	2026-09-27T10:59:49.3948224Z Checking dist/kubernetes_client-1.0.0.tar.gz: ^[[32mPASSED^[[0m

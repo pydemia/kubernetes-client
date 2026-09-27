@@ -1,0 +1,6 @@
+200 https://github.com/pydemia/kubernetes-client/blob/v1.0.0/docs/usage.md
+200 https://github.com/pydemia/kubernetes-client/blob/v1.0.0/docs/migration.md
+200 https://github.com/pydemia/kubernetes-client/blob/v1.0.0/docs/validation.md
+200 https://github.com/pydemia/kubernetes-client/blob/v1.0.0/examples/quickstart.py
+200 https://github.com/pydemia/kubernetes-client/blob/v1.0.0/RECOVERY.md
+fcda918cd47611dae88a29872481be6854611a75

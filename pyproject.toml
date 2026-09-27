@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kubernetes-client"
-version = "0.1.9"
+version = "0.9.0"
 description = "High-level functional API for Kubernetes Resources and 3rd party CRDs, based on the official kubernetes-client, and more."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"

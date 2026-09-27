@@ -20,7 +20,7 @@ from kubernetes_client.schema import ResourceSpec, Spec
 
 class CompatibilityTests(unittest.TestCase):
     def test_version_and_bearer_configuration(self):
-        self.assertEqual(__version__, "0.1.9")
+        self.assertEqual(__version__, "0.9.0")
         configuration = KubernetesManager.set_default_config(
             "https://cluster.example", token="example"
         )

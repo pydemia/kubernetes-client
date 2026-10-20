@@ -1,0 +1,33 @@
+version: 2.1
+
+jobs:
+  stable-sdk:
+    parameters:
+      python-version:
+        type: string
+    docker:
+      - image: cimg/python:<< parameters.python-version >>
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Install development tools and stable SDK
+          command: python -m pip install '.[dev]' 'kubernetes==36.0.3'
+      - run:
+          name: Build and install the wheel
+          command: |
+            python -m build
+            python -m twine check --strict dist/*
+            python -m pip install --no-deps --force-reinstall dist/*.whl
+            python -m pip check
+      - run:
+          name: Run regression and interface tests
+          command: python -m unittest discover -s tests -v
+
+workflows:
+  stable-sdk:
+    jobs:
+      - stable-sdk:
+          matrix:
+            parameters:
+              python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]

@@ -25,6 +25,10 @@ python -m unittest discover -s tests/integration -v
 python examples/quickstart.py --kubeconfig /path/to/test-config --namespace guide-example
 ```
 
+CircleCI는 Python 3.10–3.14와 안정 SDK 36.0.3에서 wheel을 설치하고 unit을 실행합니다.
+실제 cluster를 사용하는 integration과 preview SDK 검증은 아래 GitHub Actions
+workflow에서 유지합니다.
+
 GitHub Actions의 Verify interface workflow는 Python 3.10–3.14와 SDK36.0.3/
 37.0.0b1 unit matrix를 실행합니다. preview lane은 안정 SDK의 지원 선언과
 배포 필수 조건에서 제외하며 실패 결과를 별도로 확인합니다.
